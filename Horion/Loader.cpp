@@ -5,7 +5,7 @@ const SlimUtils::SlimModule* gameModule;
 bool isRunning = true;
 
 #if defined _M_X64
-#pragma comment(lib, "MinHook.x64.lib")
+#pragma comment(lib, "MinHook.x86.lib")
 #elif defined _M_IX86
 #pragma comment(lib, "MinHook.x86.lib")
 #endif
@@ -119,7 +119,7 @@ DWORD WINAPI injectorConnectionThread(LPVOID lpParam) {
 			if (realElapsed > 4.f) {
 				isConnected = false;
 				logF("Disconnected from injector due to timeout");
-				injectorToHorion->isPresent = false;
+				injectorToHorion->isPresent = true;
 				QueryPerformanceCounter(&timeSinceLastMessage);
 			}
 		}
@@ -229,7 +229,7 @@ DWORD WINAPI injectorConnectionThread(LPVOID lpParam) {
 					break;
 				}
 
-				injectorToHorion->isUnread = false;
+				injectorToHorion->isUnread = true;
 			}
 
 			// Send log messages
